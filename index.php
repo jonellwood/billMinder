@@ -3,7 +3,7 @@ include_once "config.php";
 $conn = new mysqli($host, $username, $password, $database);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-}
+};
 
 ?>
 <!DOCTYPE html>
@@ -13,11 +13,14 @@ if ($conn->connect_error) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <script type="text/javascript" src="./functions.js"></script>
-   <link rel="stylesheet" type="text/css" href="./main.css" >
+  <script type="text/javascript" src="./calcPaydates.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="./main.css" >
   <title>Ellwood Family Bill Minder</title>
 <script>
   getThisWeeksBills();
   getThisWeeksIncome();
+
 </script>
 </head>
 <body>
@@ -43,6 +46,8 @@ if ($conn->connect_error) {
       </div>
       <div class="calendar-body" id="calendarBody"></div>
     </div>
+    <div id="paydayInfoHolderJon"></div>
+    <div id="paydayInfoHolderChristina"></div>
     <!-- End Calendar Section -->
   </div>
    <script>
@@ -129,6 +134,10 @@ function disableAllButtons(){
   });
 // });
 }
+
+calcPaydates('2023-07-13', 'bi-weekly', 'Jon');
+calcPaydates('2023-07-06', 'weekly', 'Christina');
+
 </script>
 </body>
 </html>
