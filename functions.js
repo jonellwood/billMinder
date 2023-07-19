@@ -87,7 +87,7 @@ function formatNumber(number) {
       var html = "<table>"
       html += "<thead>"
       html += "<tr>"
-      html += "<th>Date</th><th>Payee</th><th>Amount</th><th>Auto Draft</th><th>is Paid</th><th>Btn</th>"
+      html += "<th>Hate</th><th>Payee</th><th>Amount</th><th>Auto Draft</th><th>is Paid</th><th>Btn</th>"
       html += "</tr>"
       html += "</thead>"
       html += "<tbody class='bills-table-body' id='bills-table-body'>"
@@ -150,3 +150,37 @@ async function getMonthlyBillsTotal(){
       document.getElementById('monthly-total-holder').innerHTML = html;
     })
   }
+// make tables sorta sortable
+    function sortTable(column) {
+      var table, rows, switching, i, x, y, shouldSwitch;
+      table = document.getElementById('myTable');
+      switching = true;
+
+      while (switching) {
+        switching = false;
+        rows = table.rows;
+
+        for (i = 1; i < rows.length - 1; i++) {
+          shouldSwitch = false;
+          x = rows[i].getElementsByTagName('td')[column];
+          y = rows[i + 1].getElementsByTagName('td')[column];
+
+          // Check if the two rows should switch place based on the selected column's content
+          if (isNaN(x.innerHTML)) {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              shouldSwitch = true;
+              break;
+            }
+          } else {
+            if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+        }
+      }
+    }

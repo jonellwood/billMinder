@@ -48,6 +48,7 @@ if ($conn->connect_error) {
     </div>
     <div id="paydayInfoHolderJon"></div>
     <div id="paydayInfoHolderChristina"></div>
+    <div id="singlePaydayHolder"></div>
     <!-- End Calendar Section -->
   </div>
    <script>

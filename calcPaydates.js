@@ -39,9 +39,9 @@ switch (income.recurrence) {
           break;
         }
         // Calculate the number of occurrences in the current month
-      var html = "";
+      var html = "<table><thead><tr><th>Date</th><th>Who</th></tr></thead><tbody>";
       var numberOfOccurrences = Math.floor(totalDays / recurrenceFactor);
-        html += "<p>Number of " + person + "'s paydays: " + numberOfOccurrences + "</p>"
+        // html += "<tr><td></td>Number of " + person + "'s paydays: " + numberOfOccurrences + "</tr>"
         // Calculate the dates of the occurrences
         var occurrenceDates = [];
         var currentDate = new Date(income.startDate);
@@ -55,14 +55,25 @@ switch (income.recurrence) {
           currentDate.setDate(currentDate.getDate() + recurrenceFactor);
       }
       for(var j = 0; j < occurrenceDates.length; j++){
-        html += "<p>Date: "+ occurrenceDates[j] +"</p>"
+        html += "<tr><td>"+ occurrenceDates[j] +"</td><td>"+ person +"</td></tr>"
       }
-      document.getElementById('paydayInfoHolder' + person).innerHTML = html;
+      // document.getElementById('paydayInfoHolder' + person).innerHTML = html;
+      html += "</tbody></table>";
+      generateAndAppendHTML(html);
       console.log('Number of occurrences:', numberOfOccurrences);
       console.log('Occurrence dates:', occurrenceDates);
 
 
       // return (numberOfOccurrences, occurrenceDates);
     }
-
+  function generateAndAppendHTML(htmlContent) {
+      var targetElement = document.getElementById('singlePaydayHolder');
+      if (targetElement.innerHTML.trim() === '') {
+        // If the innerHTML is empty, set it using "="
+        targetElement.innerHTML = htmlContent;
+      } else {
+        // If there is already content, append it using "+="
+        targetElement.innerHTML += htmlContent;
+      }
+    }
 
